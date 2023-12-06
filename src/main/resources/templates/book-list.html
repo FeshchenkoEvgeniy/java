@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<div th:switch="${books}">
+    <h2 th:case="null">Не знайдено жодної книги!</h2>
+    <div th:case="*">
+        <h2 style="display: flex; justify-content: center">Список книг</h2>
+        <div th:each="book : ${books}" style="display: flex; margin-bottom: 20px">
+            <div><img th:src="${book.img}" th:alt="${book.bookName}" height="100%" width="300px"></div>
+            <div>
+                <ul style="margin: 0px">
+                <li style="display: flex; align-items: center" ><b>Id:</b><p th:text="${book.id}" style="margin-left: 10px"></p></li>
+                <li style="display: flex; align-items: center" ><b>Назва книги:</b><p th:text="${book.bookName}" style="margin-left: 10px"></p></li>
+                <li style="display: flex; align-items: center"><b>Автор:</b><p th:text="${book.author}" style="margin-left: 10px"></p></li>
+                <li style="display: flex; align-items: center"><b>Кількість сторінок:</b><p th:text="${book.pages}" style="margin-left: 10px"></p></li>
+                <li style="display: flex; align-items: center"><b>Видавництво:</b><p th:text="${book.publishingHouse}" style="margin-left: 10px"></p></li>
+                <li style="display: flex; align-items: baseline"><b>Опис:</b><p th:text="${book.description}" style="margin-left: 10px"></p></li>
+                </ul>
+                <div style="margin-left: 40px">
+                    <a th:href="@{book-update/{id}(id=${book.id})}" style="display: inline-block; background: #2196f3; color: #fff; padding: 12px; border-radius: 3px; text-decoration: none;">Редагувати</a>
+                    <a th:href="@{book-delete/{id}(id=${book.id})}" style="display: inline-block; background: #2196f3; color: #fff; padding: 12px; border-radius: 3px; text-decoration: none;">Видалити</a>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <a href="/book-create" style="display: inline-block; background: #2196f3; color: #fff; padding: 12px; border-radius: 3px; text-decoration: none;" >Додати книгу</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
